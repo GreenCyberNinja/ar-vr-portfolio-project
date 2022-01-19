@@ -4,18 +4,28 @@ using UnityEngine;
 
 public class Brick : MonoBehaviour
 {
-    public float Airpressure;
     public Vector3 origin;
+    Rigidbody rb;
+    Collider col;
+    Renderer ren;
     
-    // Start is called before the first frame update
+    // Start sets the variables to be used for the repositions
     void Start()
     {
+        origin = this.transform.localPosition;
+        rb = GetComponent<Rigidbody>();
+        col = GetComponent<BoxCollider>();
+        ren = GetComponent<MeshRenderer>();
+    }
+
+    void RePosition()
+    {
+        this.transform.localPosition = origin;
+        rb.isKinematic = true;
+        col.enabled = false;
+        ren.enabled = false;
+        
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
