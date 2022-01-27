@@ -11,7 +11,7 @@ public class Obj2 : MonoBehaviour
     bool timerIsRunning = false;
     int x, curnumbrk, minblock = 20, maxblock = 0;
     public float maxtime;
-    float y;
+    public float y;
     // Start set the randomly selected structure
     void Start()
     {
@@ -30,7 +30,7 @@ public class Obj2 : MonoBehaviour
     private void Update()
     {
         if (timerIsRunning)
-            if (y > 0)
+            if (y >= 0)
             {
                 y -= Time.deltaTime;
                 if (curnumbrk >= x)
@@ -55,5 +55,10 @@ public class Obj2 : MonoBehaviour
         timerIsRunning = false;
         yield return new WaitForSeconds(5);
         timerIsRunning = true;
+    }
+    private void OnTriggerEnter(Collider other) 
+    {
+        curnumbrk += 1;
+        other.GetComponent<Brick>().RePosition();
     }
 }

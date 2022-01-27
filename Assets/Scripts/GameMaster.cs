@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameMaster : MonoBehaviour
 {
     public List<GameObject> Structures;
     public GameObject Detectplane;
+    public Slider sld;
+    public Text scrtext;
     public int Score;
+    public float round;
 
     public void GameStart()
     {
@@ -28,15 +32,18 @@ public class GameMaster : MonoBehaviour
                 Detectplane.GetComponent<Obj3>().Strct = Structures[Strucnum];
                 break;
         }
+        round = sld.value;
     }
 
     public void GameWin()
     {
         Score += 1;
+        Debug.Log("youwin");
     }
     public void GameLose()
     {
-        Score += 2;
+        Score -= 1;
+        Debug.Log("youlose");
         
     }
     public void Gamefinish()
@@ -45,8 +52,7 @@ public class GameMaster : MonoBehaviour
     {
         foreach (Transform child in Structure.transform)
         {
-            child.localPosition = child.GetComponent<Brick>().origin;
-            child.GetComponent<Rigidbody>().isKinematic = true;
+            child.GetComponent<Brick>().RePosition();
             if (!child.GetComponent<MeshRenderer>().enabled)
                 child.GetComponent<MeshRenderer>().enabled = true;
             if (!child.GetComponent<Collider>().enabled)

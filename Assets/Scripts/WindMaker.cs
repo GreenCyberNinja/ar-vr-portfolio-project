@@ -22,14 +22,17 @@ public class WindMaker : MonoBehaviour
         trigHeld = actionmap.FindAction("ActivateHeld");
         trigPresd.performed += MakeWindOBJ;
         trigPresd.canceled += MakeWindMV;
-        Handfan = this.transform.GetChild(1);
+        Handfan = this.transform;
     }
     private void Update()
     {
         if (trigHeld.ReadValue<float>() > 0)
         {
-            CurLine.positionCount += 1;
-            CurLine.SetPosition(CurLine.positionCount - 1, Handfan.position);
+            if (CurLine.positionCount < 50)
+            {
+                CurLine.positionCount += 1;
+                CurLine.SetPosition(CurLine.positionCount - 1, Handfan.position);
+            }
         }
     }
     /// createss gameObject to use
@@ -44,13 +47,17 @@ public class WindMaker : MonoBehaviour
     /// launches wind object from player
     void MakeWindMV(InputAction.CallbackContext context)
     {
-        Debug.Log("woosh");
         windPOS = CurLine.GetPosition(CurLine.positionCount / 2);
         CurLine.useWorldSpace = false;
+        wind.AddComponent<WindMove>();
+        wind.GetComponent<WindMove>().windPos = windPOS;
+        wind.GetComponent<WindMove>().playerORGN = playerORGN.transform.position;
         MeshCollider meshcol = wind.AddComponent<MeshCollider>();
         Mesh mesh = new Mesh();
         CurLine.BakeMesh(mesh, true);
         meshcol.sharedMesh = mesh;
+        meshcol.convex = true;
         meshcol.isTrigger = true;
+        wind.GetComponent<WindMove>().moveNow = true;
     }
 }
