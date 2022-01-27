@@ -10,7 +10,9 @@ You are the newest employee for the F.A.N.(Fancy Acronym Name) corporation. You 
 
 ## DevLogs
 [devlog#0](https://www.linkedin.com/pulse/fanantics-devlog-0-david-duval/)
+
 [devlog#1](https://www.linkedin.com/pulse/fanantics-devlog-1-david-duval/)
+
 [comingsoon](https://www.linkedin.com/in/hiredaviddforyourteam/)
 ## Authors
 David Duval - [LinkedIn](https://www.linkedin.com/in/hiredaviddforyourteam/)
